@@ -1,0 +1,14 @@
+.container_button_left{
+    display: flex;
+}
+.button_left{
+    display: flex;
+    width: 70px;
+    align-self: center;
+    margin-right: 50px;
+    &:hover {
+        margin-right: 40px;
+        width: 80px;
+        cursor: pointer;
+    }
+}

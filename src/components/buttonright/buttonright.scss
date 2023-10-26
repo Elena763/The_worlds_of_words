@@ -1,0 +1,14 @@
+.container_button_right{
+    display: flex;
+}
+.button_right{
+    display: flex;
+    width: 70px;
+    align-self: center;
+    margin-left: 50px;
+    &:hover {
+        margin-left: 40px;
+        width: 80px;
+        cursor: pointer;
+    }
+}

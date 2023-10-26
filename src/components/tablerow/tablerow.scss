@@ -1,0 +1,54 @@
+@import "../../assets/variables/colors.scss";
+.tablerow{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 40px;
+  grid-auto-flow: row;
+  border: 1px solid $white;
+  background-image: linear-gradient($darkpink, $lightpink);
+}
+/*.row-english{
+
+}
+.row-transcription{
+
+}
+.row-russian{
+
+}
+.row-tags{
+
+}*/
+.edit-block{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+}
+.row-edit, .row-save{
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  background-color: $darkpink;
+  border-radius: 10px;
+  &:hover {
+    width: 38px;
+    cursor: pointer;
+    border: 2px solid $black;
+    background-color: $lightpink;
+  }
+}
+.row-delete{
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: 40px;
+  background-color: $darkpink;
+  border-radius: 10px;
+  &:hover {
+    width: 38px;
+    cursor: pointer;
+    border: 2px solid $black;
+    background-color: $lightpink;
+  }
+}

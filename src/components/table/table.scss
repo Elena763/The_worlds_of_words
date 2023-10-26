@@ -1,0 +1,20 @@
+@import "../../assets/variables/colors.scss";
+.table{
+    margin: 50px 20%;
+    display: grid;
+    /*border: 1px solid #000000;*/
+    border-radius: 10px;
+}
+.table-title{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: $darkpink;
+    color: $light;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+.table-english, .table-transcription, .table-russian, .table-tags, .table-edit, .table-delete {
+    border: 1px solid $white;
+    padding: 2px;
+}
