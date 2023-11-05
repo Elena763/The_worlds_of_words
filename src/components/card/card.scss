@@ -12,35 +12,49 @@
     height: 600px;
     box-shadow: 5px 5px 20px $purple,
               -5px -10px 20px $pink;
-}
-.card__english{
-    /*border: 1px solid  #F498AD;*/
-    height: 100px;
-    font-size: 70px;
-}
-.card__transcription{
-    /*border: 1px solid  #F498AD;*/
-    height: 70px;
-    font-size: 40px;
-}
-.card__button{
-    display: flex;
-    flex-wrap: wrap;
-    border: 3px solid $purple-gray;
-    border-radius: 15px;
-    background-color: $purple-transp;
-    color: $white;
-    height: 50px;
-    width: 200px;
-    font-size: 20px;
-    margin-top: 20px;
-    justify-content: center;
-    align-content: center;
-    align-self: center;
-    &:hover {
-        background-color: $purple-gray;
-        border: 3px solid $purple-transp;
+
+    &__english{
+        /*border: 1px solid  #F498AD;*/
+        height: 100px;
+        font-size: 70px;
+    }
+    &__transcription{
+        /*border: 1px solid  #F498AD;*/
+        height: 70px;
+        font-size: 40px;
+        color: $gray;
+    }
+    &__container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-self: center;
+    }
+    &__button{
+        display: flex;
+        flex-wrap: wrap;
+        border: 3px solid $purple-gray;
+        border-radius: 15px;
+        background-color: $purple-transp;
+        color: $white;
+        height: 50px;
+        width: 200px;
+        font-size: 20px;
+        margin-top: 20px;
+        justify-content: center;
+        align-content: center;
+        align-self: center;
+        &:hover {
+            background-color: $purple-gray;
+            border: 3px solid $purple-transp;
+            color: $purple;
+            cursor: pointer;
+        }
+    }
+    &__translation{
+        height: 70px;
+        font-size: 60px;
         color: $purple;
-        cursor: pointer;
     }
 }

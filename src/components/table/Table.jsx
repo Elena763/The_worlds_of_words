@@ -4,18 +4,18 @@ import {words} from "../words.js"
 
 function Table() {
     return (
-      <div className="table">
-        <div className="table-title">
-          <div className="table-english">English</div>
-          <div className="table-transcription">Transcription</div>
-          <div className="table-russian">Russian</div>
-          <div className="table-tags">Tags</div>
-          <div className="table-edit">Edit</div>
-          <div className="table-delete">Delete</div>
-        </div>
-        <div className="row">
+      <table className="table">
+        <thead className="table-title">
+          <th className="table-english">English</th>
+          <th className="table-transcription">Transcription</th>
+          <th className="table-russian">Russian</th>
+          <th className="table-tags">Tags</th>
+          <th className="table-edit">Edit</th>
+          <th className="table-delete">Delete</th>
+        </thead>
+        <tbody className="row">
           {
-            words.map((word)=>
+            words.map((word)=>(
               <Tablerow
               key={word.id}
               english={word.english}
@@ -23,10 +23,9 @@ function Table() {
               russian={word.russian}
               tags={word.tags}
               />
-            )
-          }
-        </div>
-      </div>
+              ))}
+        </tbody>
+      </table>
     );
   }
   export default Table;
