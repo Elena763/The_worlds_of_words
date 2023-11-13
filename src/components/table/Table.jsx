@@ -5,13 +5,15 @@ import {words} from "../words.js"
 function Table() {
     return (
       <table className="table">
-        <thead className="table-title">
-          <th className="table-english">English</th>
-          <th className="table-transcription">Transcription</th>
-          <th className="table-russian">Russian</th>
-          <th className="table-tags">Tags</th>
-          <th className="table-edit">Edit</th>
-          <th className="table-delete">Delete</th>
+        <thead className="tableTitle">
+          <tr>
+            <td className="tableEnglish">English</td>
+            <td className="tableTranscription">Transcription</td>
+            <td className="tableRussian">Russian</td>
+            <td className="tableTags">Tags</td>
+            <td className="tableEedit">Edit</td>
+            <td className="tableDelete">Delete</td>
+          </tr>
         </thead>
         <tbody className="row">
           {

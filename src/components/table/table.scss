@@ -4,19 +4,19 @@
     /*border: 1px solid #000000;*/
     border-radius: 10px;
 }
-.table-title{
+.tableTitle{
     background-color: $darkpink;
     color: $light;
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
 }
-.table-english, .table-transcription, .table-russian, .table-tags, .table-edit, .table-delete {
+.tableEnglish, .tableTranscription, .tableRussian, .tableTags, .tableEdit, .tableDelete {
     border: 1px solid $white;
     padding: 2px;
     height: 40px;
 }
-th{
+td{
     width: 200px;
     max-width: 100%;
 }

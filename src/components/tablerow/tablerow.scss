@@ -5,7 +5,7 @@
   background-image: linear-gradient($darkpink, $lightpink);
 }
 
-.row-edit, .row-save, .row-delete, .row-cansel{
+.rowEdit, .rowSave, .rowDelete, .rowCansel{
   display: flex;
   flex-wrap: wrap;
   width: 40px;
@@ -26,7 +26,7 @@
   width: 28px;
   height: 28px;
 }
-.input-english, .input-transcription, .input-russian, .input-tags{
+.inputEnglish, .inputTranscription, .inputRussian, .inputTags{
   font-family: 'Overpass';
   width: 100%;
   height: 25px;

@@ -37,33 +37,33 @@ function Tablerow(props)
   return (
     <tr className="tablerow">
 
-      <td className="row-english">
-        {pressed ? <input name="english" className="input-english"
+      <td className="rowEnglish">
+        {pressed ? <input name="english" className="inputEnglish"
          value={textEnglish}
          onChange={changeEnglish}/> : props.english}
       </td>
-      <td className="row-transcription">
-        {pressed ? <input name="transcription" className="input-transcription"
+      <td className="rowTranscription">
+        {pressed ? <input name="transcription" className="inputTranscription"
         value={textTranscription}
         onChange={changeTranscription}/> :props.transcription}
       </td>
-      <td className="row-russian">
-        {pressed ? <input name="russian" className="input-russian" value={textRussian} onChange={changeRussian}/> :props.russian}
+      <td className="rowRussian">
+        {pressed ? <input name="russian" className="inputRussian" value={textRussian} onChange={changeRussian}/> :props.russian}
       </td>
-      <td className="row-tags">
-        {pressed ? <input name="tags" className="input-tags" value={textTags} onChange={changeTags}/> :props.tags}
+      <td className="rowTags">
+        {pressed ? <input name="tags" className="inputTags" value={textTags} onChange={changeTags}/> :props.tags}
       </td>
-      <td className="edit-block">
+      <td className="editBlock">
         <div>
         {pressed ? (
-          <button className="row-save" onClick={handlePressedSave}>
+          <button className="rowSave" onClick={handlePressedSave}>
             <img className="save"
             src={Save}
             alt="save"
             />
           </button>
         ) : (
-          <button className="row-edit" onClick={handlePressedEdit}>
+          <button className="rowEdit" onClick={handlePressedEdit}>
             <img className="edit"
             src={Edit}
             alt="edit"
@@ -72,17 +72,17 @@ function Tablerow(props)
         )}
         </div>
       </td>
-      <td className="delete-block">
+      <td className="deleteBlock">
           <div>
           {pressed ? (
-          <button className="row-cansel" onClick={handlePressedSave}>
+          <button className="rowCansel" onClick={handlePressedSave}>
             <img className="cansel"
             src={Cansel}
             alt="cansel"
             />
           </button>
         ) : (
-          <button className="row-delete" onClick={handlePressedEdit}>
+          <button className="rowDelete" onClick={handlePressedEdit}>
             <img className="delete"
             src={Delete}
             alt="delete"

@@ -11,4 +11,8 @@
         width: 80px;
         cursor: pointer;
     }
+    &:active {
+        width: 70px;
+        margin-right: 50px;
+    }
 }

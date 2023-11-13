@@ -1,9 +1,14 @@
 import "./card.scss";
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-function Card()
+function Card(props)
   {
     const [pressed, setPressed] = useState(true);
+    const btnRef = useRef();
+
+    useEffect(()=>{
+      btnRef.current.focus();
+    }, []);
 
     const handlePressedTranslation = () => {
       setPressed(!pressed);
@@ -11,16 +16,16 @@ function Card()
 
   return (
     <div className="card">
-      <div className="card__english">english</div>
-      <div className="card__transcription">transcription</div>
+      <div className="card__english">{props.english}</div>
+      <div className="card__transcription">{props.transcription}</div>
       <div className="card__container">
       {pressed ? (
-        <button className="card__button" onClick={handlePressedTranslation}>
+        <button className="card__button"  ref={btnRef} onClick={handlePressedTranslation}>
           Перевод
         </button>
       ) : (
         <div className="card__translation">
-          русский
+          {props.russian}
         </div>
       )}
       </div>
