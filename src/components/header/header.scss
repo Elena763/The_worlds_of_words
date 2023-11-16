@@ -9,6 +9,16 @@
     align-items: end;
     height: 100px;
     box-shadow: 0 5px 10px $gray;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    justify-content: center;
 }
 .menu{
     display: grid;
@@ -46,4 +56,11 @@
         text-decoration: underline;
         cursor: pointer;
     }
+}
+.h_table, .h_card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Asap', 'Overpass';
 }
