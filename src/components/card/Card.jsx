@@ -1,17 +1,22 @@
-import "./card.scss";
 import React, { useState, useRef, useEffect } from "react";
+import "./card.scss";
 
 function Card(props)
   {
-    const [pressed, setPressed] = useState(true);
-    const btnRef = useRef();
+    const [pressed, setPressed] = useState(false);
+    const ref = useRef(null);
 
-    useEffect(()=>{
-      btnRef.current.focus();
-    }, []);
+    useEffect(()=> {
+      if (ref.current) {
+        ref.current.focus();
+        console.log(ref.current);
+      }
+    });
 
-    const handlePressedTranslation = () => {
+    const handlePressedTranslation = (e) => {
+      e.preventDefault();
       setPressed(!pressed);
+      props.wordAdd(props.id);
     };
 
   return (
@@ -20,13 +25,13 @@ function Card(props)
       <div className="card__transcription">{props.transcription}</div>
       <div className="card__container">
       {pressed ? (
-        <button className="card__button"  ref={btnRef} onClick={handlePressedTranslation}>
-          Перевод
-        </button>
-      ) : (
         <div className="card__translation">
           {props.russian}
         </div>
+      ) : (
+        <button ref={ref} className="card__button" onClick={handlePressedTranslation}>
+          Перевод
+        </button>
       )}
       </div>
     </div>

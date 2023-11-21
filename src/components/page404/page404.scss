@@ -1,0 +1,17 @@
+@import "../../assets/variables/colors.scss";
+@import "../../assets/variables/fonts.scss";
+.page404{
+    font-family: 'Pasifico';
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.page404Content{
+    font-size: 170px;
+    color: $darkpink;
+}
+.page404message{
+    margin-top: 15px;
+    font-size: 70px;
+    color: $darkgray-transp;
+}
