@@ -11,7 +11,7 @@ function Table() {
             <td className="tableTranscription">Transcription</td>
             <td className="tableRussian">Russian</td>
             <td className="tableTags">Tags</td>
-            <td className="tableEedit">Edit</td>
+            <td className="tableEdit">Edit</td>
             <td className="tableDelete">Delete</td>
           </tr>
         </thead>
