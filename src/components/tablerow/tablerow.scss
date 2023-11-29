@@ -21,6 +21,9 @@
     border: 2px solid $black;
     background-color: $lightpink;
   }
+  &:disabled{
+    background-color: $darkgray-transp;
+  }
 }
 .save, .cansel{
   width: 28px;
@@ -43,4 +46,9 @@
   border-radius: 10px;
   border: 1px solid rgb(255, 0, 0);
   color: rgb(255, 0, 0);
+}
+.errorMessage{
+  font-family: 'Overpass';
+  color: rgb(131, 2, 2);
+  font-size: 12px;
 }
