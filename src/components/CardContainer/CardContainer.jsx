@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import Card from "../card/Card.jsx";
+import React, { useState, useContext } from 'react';
+import Card from "../Card/Card.jsx";
 import ButtonLeft from "../buttonleft/ButtonLeft.jsx";
 import ButtonRight from "../buttonright/ButtonRight.jsx";
 import  "./cardContainer.scss";
-import {words} from "../words.js"
+import { WordsContext } from '../WordContext.jsx';
 
 
  export default function CardContainer() {
     const [slideIndex, setSlideIndex] = useState(1);
     const [wordNumber, setwordNumber] = useState(0);
-    //const [wordLearned, setwordLearned] = useState([]);
+    const [wordLearned, setwordLearned] = useState([]);
+    const { words } = useContext(WordsContext);
 
     const nextSlide = () => {
         if (slideIndex !== words.length) {
@@ -30,17 +31,21 @@ import {words} from "../words.js"
     };
 
     const wordAdd = (id) => {
-            setwordNumber(wordNumber + 1);
+        const array = [...wordLearned];
+        array.push(id);
+        let result = [];
+        for (let str of array) {
+          if (!result.includes(str)) {
+            result.push(str);
+          }
+        }
+        setwordLearned(result);
+        setwordNumber(result.length);
     };
 
     const elements = words.map((word) => {
             const { id, ...wordProps } = word;
-            return <Card
-                key={id}
-                id={id}
-                wordAdd={wordAdd}
-                {...wordProps}
-            />;
+            return <Card key={id} id={id} wordAdd={wordAdd} {...wordProps} />;
         });
 
     return (

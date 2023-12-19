@@ -1,8 +1,20 @@
-import Tablerow from "../tablerow/Tablerow.jsx";
+import React, { useState, useEffect, useContext } from "react";
+import Tablerow from "../Tablerow/Tablerow.jsx";
 import "./table.scss";
-import {words} from "../words.js"
+//import {words} from "../words.js";
+import { WordsContext } from '../WordContext.jsx';
 
 function Table() {
+  const { words, deleteWords } = useContext(WordsContext);
+  const [wordCollection, setwordCollection] = useState(words);
+
+  useEffect(() => {
+    setwordCollection(words);
+  }, [words]);
+
+  const onDelete = (id) => {
+    deleteWords(id);
+  };
     return (
       <table className="table">
         <thead className="tableTitle">
@@ -16,16 +28,11 @@ function Table() {
           </tr>
         </thead>
         <tbody className="row">
-          {
-            words.map((word)=>(
+            {wordCollection.map((word, index) => (
               <Tablerow
-              key={word.id}
-              english={word.english}
-              transcription={word.transcription}
-              russian={word.russian}
-              tags={word.tags}
+              index={index} key={word.id} {...word} onDelete={onDelete}
               />
-              ))}
+            ))}
         </tbody>
       </table>
     );

@@ -1,9 +1,10 @@
 import "./header.scss";
 import CardContainer from "../CardContainer/CardContainer.jsx";
-import Table from "../table/Table.jsx";
+import Table from "../Table/Table.jsx";
 import Space from "../../assets/icons/galaxy_icon.png";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Page404 from "../page404/Page404.jsx";
+import Page404 from "../Page404/Page404.jsx";
+import WordsApi from '../WordContext.jsx';
 
 function Header() {
   return (
@@ -31,12 +32,14 @@ function Header() {
             </div>
           </div>
         </div>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/game" element={<Game />} />
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<PageError />} />
-        </Routes>
+        <WordsApi>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/game" element={<Game />} />
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<PageError />} />
+          </Routes>
+        </WordsApi>
       </Router>
     </div>
   );
