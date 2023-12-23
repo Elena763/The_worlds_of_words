@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'mobx-react';
+import WordStore from './store/WordsStore.js';
+
+const store = {
+  wordStore: new WordStore(),
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <Provider {...store}>
     <App />
-  </React.StrictMode>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

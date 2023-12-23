@@ -1,8 +1,11 @@
+import { observer, inject } from "mobx-react";
 import Tablerow from "../Tablerow/Tablerow.jsx";
 import "./table.scss";
-import {words} from "../words.js"
 
-function Table() {
+function Table({ wordStore }) {
+    const onDelete = (id) => {
+      wordStore.deleteWords(id);
+    };
     return (
       <table className="table">
         <thead className="tableTitle">
@@ -17,17 +20,16 @@ function Table() {
         </thead>
         <tbody className="row">
           {
-            words.map((word)=>(
+            wordStore.words.map((word, index)=>(
               <Tablerow
+              index={index}
               key={word.id}
-              english={word.english}
-              transcription={word.transcription}
-              russian={word.russian}
-              tags={word.tags}
+              word={word}
+              onDelete={onDelete}
               />
               ))}
         </tbody>
       </table>
     );
-  }
-  export default Table;
+}
+export default inject(['wordStore'])(observer(Table));

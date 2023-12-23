@@ -1,182 +1,127 @@
 //import AddSave from "../Save/AddSave.jsx";
 import React, { useEffect, useState } from "react";
+import { observer, inject } from 'mobx-react';
 import Delete from "./../../assets/icons/trash.svg";
 import Edit from "./../../assets/icons/pencil.svg";
 import Save from "./../../assets/icons/save.svg";
 import Cansel from "./../../assets/icons/cansel.svg";
 import "./tablerow.scss";
 
-function Tablerow(props)
+function Tablerow({ wordStore, word })
 {
   const [pressed, setPressed] = useState(false);
-  const [state, setState] = useState(props);
-  const [english, setEnglish] = useState('');
-  const [transcription, setTranscription] = useState('');
-  const [russian, setRussian] = useState('');
-  const [tags, setTags] = useState('');
-  const [englishDirty, setEnglishDirty] = useState(false);
-  const [transcriptionDirty, setTranscriptionDirty] = useState(false);
-  const [russianDirty, setRussianDirty] = useState(false);
-  const [tagsDirty, setTagsDirty] = useState(false);
-  const [formValid, setFormValid] = useState(false);
-  const [errorEnglish, setErrorEnglish] = useState(false);
-  const [errorTranscription, setErrorTranscription] = useState(false);
-  const [errorRussian, setErrorRussian] = useState(false);
-  const [errorTags, setErrorTags] = useState(false);
-//Помечаем форму не валидной, чтобы заблокровать кнопку Сохранить
-  useEffect(() => {
-    if (errorEnglish || errorRussian || errorTranscription || errorTags) {
-      setFormValid(false)
-    } else {
-      setFormValid(true)
-    }
-  }, [errorEnglish, errorRussian, errorTranscription, errorTags])
-//Ошибки инпутов
-  const englishHandler = (e) =>{
-    setEnglish(e.target.value)
-    const re = /^[a-zA-Z\s]+$/;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setErrorEnglish('Поле должно содержать только английские буквы')
-    } else {
-      setErrorEnglish()
-    }
-  }
+  const [state, setState] = useState(word);
+  const [errors, setErrors] = useState({});
 
-  const russianHandler = (e) =>{
-    setRussian(e.target.value)
-    const re = /^[а-яА-ЯёЁ]+$/;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setErrorRussian('Поле должно содержать только русские буквы')
-    } else {
-      setErrorRussian()
-    }
-  }
+  const checkValidation = () => {
+    const newErrors = Object.keys(state).reduce((account, item) => {
+      // eslint-disable-next-line default-case
+      switch (item) {
+        case "english":
+        case "transcription":
+        case "russian":
+        case "tags":
+          account = {
+            ...account,
+            [item]: state[item].trim().length > 0 ? undefined : "Пустое поле",
+          };
+          break;
+      }
+      return account;
+    }, {});
 
-  const transcriptionHandler = (e) =>{
-    setTranscription(e.target.value)
-    const re = /^[\D]*$/;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setErrorTranscription("Поле должно содержать только английские буквы и символы [, ], :, '")
-    } else {
-      setErrorTranscription()
-    }
-  }
-
-  const tagsHandler = (e) =>{
-    setTags(e.target.value)
-    const re = /^[a-zA-Zа-яА-ЯёЁ\s]+$/;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setErrorTags('Поле должно содержать только буквы')
-    } else {
-      setErrorTags()
-    }
-  }
-//Вывод ошибки
-  const blurHandler = (e) => {
-    switch (e.target.name) {
-      case 'english':
-        setEnglishDirty(true)
-        break
-      case 'transcription':
-        setRussianDirty(true)
-        break
-      case 'russian':
-        setTranscriptionDirty(true)
-        break
-      case 'tags':
-        setTagsDirty(true)
-        break
-    }
-  }
-
-  const handlePressedSave = () => {
-    if (english === "" ) {
-      setErrorEnglish(true);
-    }
-    if (transcription === "") {
-      setErrorTranscription(true);
-    }
-    if (russian === "") {
-      setErrorRussian(true);
-    }
-    if (tags === "") {
-      setErrorTags(true);
-    }
-    if (english !== "" && transcription !== "" && russian!== "" && tags !== "") {
-      setPressed(!pressed);
-      console.log(english, transcription, russian, tags);
-    }
+    setErrors(newErrors);
   };
+
+  const handleChangeSave = (event) => {
+    event.preventDefault();
+    checkValidation();
+    if (state.english !== "" && state.transcription !== "" && state.russian !== "" && state.tags !== "") {
+      setPressed(!pressed);
+    }
+    wordStore.wordEdit(state);
+  };
+
+  const handleChangeEdit = (event) => {
+    event.preventDefault();
+    checkValidation();
+    setPressed(!pressed);
+  }
+
+  const handleChangeInput = (event) => {
+    setState({
+      ...state,
+      [event.target.dataset.name]: event.target.value,
+    });
+
+    if (event.target.value.match(/[0-9]/)) {
+      alert("Пожалуйста, вводите только буквы");
+    }
+
+    checkValidation();
+  };
+
 
   const handleChangeCansel = () => {
     setState({
-      ...props,
+      ...wordStore.words,
     });
     setPressed(!pressed);
-    setErrorEnglish(false);
-    setErrorTranscription(false);
-    setErrorRussian(false);
-    setErrorTags(false);
+  };
+
+  const ondelete = () => {
+    wordStore.wordDelete(word.id);
   };
 
   return (
     <tr className="tablerow">
-
       <td className="rowEnglish">
-      {(englishDirty && errorEnglish) && <div className="errorMessage">{errorEnglish}</div>}
         {pressed ? (
           <input
           name="english"
-          className={errorEnglish ? "inputError":"inputEnglish"}
+          className={errors.english !== undefined ? "inputError":"inputEnglish"}
           data-name={"english"}
-          value={english}
-          onBlur={e => blurHandler(e)}
-          onChange={e => englishHandler(e)}
+          value={state.english}
+          onChange={handleChangeInput}
           />
         ) : (
           state.english
         )}
       </td>
       <td className="rowTranscription">
-      {(transcriptionDirty && errorTranscription) && <div className="errorMessage">{errorTranscription}</div>}
         {pressed ? (
           <input
           name="transcription"
-          className={errorTranscription ? "inputError":"inputTranscription"}
+          className={ errors.transcription !== undefined ? "inputError":"inputTranscription"}
           data-name={"transcription"}
-          value={transcription}
-          onBlur={e => blurHandler(e)}
-          onChange={e => transcriptionHandler(e)}
+          value={state.transcription}
+          onChange={handleChangeInput}
           />
         ):(
             state.transcription
         )}
       </td>
       <td className="rowRussian">
-      {(russianDirty && errorRussian) && <div className="errorMessage">{errorRussian}</div>}
         {pressed ? (
           <input
           name="russian"
-          className={errorRussian ? "inputError":"inputRussian"}
+          className={errors.russian !== undefined ? "inputError":"inputRussian"}
           data-name={"russian"}
-          value={russian}
-          onBlur={e => blurHandler(e)}
-          onChange={e => russianHandler(e)}
+          value={state.russian}
+          onChange={handleChangeInput}
           />
         ) : (
           state.russian
       )}
       </td>
       <td className="rowTags">
-      {(tagsDirty && errorTags) && <div className="errorMessage">{errorTags}</div>}
         {pressed ? (
           <input
           name="tags"
-          className={errorTags ? "inputError":"inputTags"}
+          className={errors.tags !== undefined? "inputError":"inputTags"}
           data-name={"tags"}
-          value={tags}
-          onBlur={e => blurHandler(e)}
-          onChange={e => tagsHandler(e)}
+          value={state.tags}
+          onChange={handleChangeInput}
           />
         ) : (
           state.tags
@@ -186,9 +131,8 @@ function Tablerow(props)
         <div>
         {pressed ? (
           <button
-            disabled={!formValid}
             className="rowSave"
-            onClick={handlePressedSave}>
+            onClick={handleChangeSave}>
             <img className="save"
             src={Save}
             alt="save"
@@ -212,7 +156,7 @@ function Tablerow(props)
           {pressed ? (
           <button
             className="rowCansel"
-            onClick={handlePressedSave}>
+            onClick={handleChangeSave}>
             <img className="cansel"
             src={Cansel}
             alt="cansel"
@@ -222,6 +166,7 @@ function Tablerow(props)
           <button
             className="rowDelete">
             <img className="delete"
+            onClick={ondelete}
             src={Delete}
             alt="delete"
             />
@@ -232,4 +177,4 @@ function Tablerow(props)
   </tr>
   );
 }
-export default Tablerow;
+export default inject(['wordStore'])(observer(Tablerow));
