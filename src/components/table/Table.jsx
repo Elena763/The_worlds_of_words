@@ -1,4 +1,4 @@
-import Tablerow from "../tablerow/Tablerow.jsx";
+import Tablerow from "../Tablerow/Tablerow.jsx";
 import "./table.scss";
 import {words} from "../words.js"
 

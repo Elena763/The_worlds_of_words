@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Card from "../card/Card.jsx";
+import Card from "../Card/Card.jsx";
 import ButtonLeft from "../buttonleft/ButtonLeft.jsx";
 import ButtonRight from "../buttonright/ButtonRight.jsx";
 import  "./cardContainer.scss";

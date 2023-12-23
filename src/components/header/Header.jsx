@@ -1,9 +1,9 @@
 import "./header.scss";
 import CardContainer from "../CardContainer/CardContainer.jsx";
-import Table from "../table/Table.jsx";
+import Table from "../Table/Table.jsx";
 import Space from "../../assets/icons/galaxy_icon.png";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Page404 from "../page404/Page404.jsx";
+import Page404 from "../Page404/Page404.jsx";
 
 function Header() {
   return (
